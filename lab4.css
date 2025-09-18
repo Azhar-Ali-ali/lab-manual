@@ -1,0 +1,19 @@
+*{
+    background-image:url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fexplore%2Froyalty-free-images&psig=AOvVaw0KjhwsW3vwPCePTE09OJCs&ust=1758279333277000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCPCh_4uT4o8DFQAAAAAdAAAAABAE");
+    background-size: cover;
+    background-repeat: no-repeat;
+ }
+ .heading_e,.paragraph_e{
+        color: #324646;
+        background-color: antiquewhite;
+        border: solid;
+        border-color: black;
+        border-radius:10px;
+        padding: 10px;
+    }
+    .box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
