@@ -3,23 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <title>My Online Lab Manual</title>
+  <style>
+    /* Reset some default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background:#ebd4d4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #2b3d8f;
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    p {
+      font-size: 1.1em;
+      max-width: 700px;
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: #fff;
+      background-color: #3b57ff;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      background-color: #243baf;
+      transform: scale(1.05);
+    }
+
+    .lab-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    hr {
+      width: 80%;
+      border: none;
+      height: 2px;
+      background: #3b57ff;
+      margin: 30px 0;
+    }
+
+    h2 {
+      color: #1e2b6b;
+      margin-bottom: 15px;
+    }
+
+    img {
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin: 10px;
+      transition: transform 0.3s;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
   <h1>My Online Lab Manual</h1>
   <p>
     Welcome to my online lab manual. This is my personal collection of lab experiments
-    for Web Technologies, where I explore HTML, CSS, and more. Each lab is documented and organized for easy reference.
+    for Web Technologies, where I explore HTML, CSS, and more.
+    Each lab is documented and organized for easy reference.
   </p>
-  <p>View my 1 lab: <a href="lab1.html">Go to Lab 1</a>
-    <p>View my 3 lab: <a href="lab3.html">Go to Lab 3</a>
-      <p>View my 4 lab: <a href="lab4.html">Go to Lab 4</a>
-   <p>View my 5 lab: <a href="lab5.html">Go to Lab 5</a>
-  </p>
+
+  <div class="lab-links">
+    <a href="lab1.html">Go to Lab 1</a>
+    <a href="lab3.html">Go to Lab 3</a>
+    <a href="lab4.html">Go to Lab 4</a>
+    <a href="lab5.html">Go to Lab 5</a>
+  </div>
+
   <hr>
+
   <h2>GitHub Pages Preview</h2>
   <img src="lab2.PNG" alt="GitHub Pages Screenshot 1" width="400">
-  <br><br>
   <img src="lab2_2.PNG" alt="GitHub Pages Screenshot 2" width="400">
-
 </body>
 </html>
