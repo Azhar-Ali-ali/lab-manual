@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .body{
+            width:100%;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+        .box{
+            width:100%;
+            min-height:100%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:24px}
+            .quiz-box{
+                width:100%;
+                max-width:800px;
+                height:60vh;
+                background-color: rgb(236, 230, 230);
+                border-radius:10px;
+
+            }
+            .section-quiz{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                
+                
+            }
+            .Button-Start{
+                padding:10px;
+                width:100px;
+                background-color:black;
+                color: white;
+                border-radius:20px;
+            }
+            .Button-pre{
+                font-size:10px;
+                padding:5px;
+                width:100px;
+                background-color:white;
+                color:black;
+                border-radius:20px;
+            }
+           .Button-next{
+                
+                font-size:10px;
+                padding:5px;
+                width:100px;
+                background-color:black;
+                color:white;
+                border-radius:20px;
+            }
+            .quiz{
+                padding:0 20px;
+                display:none;
+            }
+            .result{
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+             display: none;
+            }
+            .score{
+                font-size:40px;
+            }
+            #final-message{
+                font-size:40px;
+            }
+            .button-retake{
+                padding:5px;
+                width:150px;
+                background-color:black;
+                color:white;
+                border-radius:20px;
+            }
+    </style>
+</head>
+<body>
+  
+<div class="box">
+<main class="quiz-box">
+<header style="display: flex;align-items: baseline;justify-content: space-between;padding:0 20px;">
+    <h1>Quiz</h1>
+    <p style="opacity: 0.5;">Web Technology</p>
+</header>
+<section class="section-quiz">
+    <h1 align="center">Test your web-tech knowledge!</h1>
+    <p align="center" style="opacity:0.6;">Ready to check how much you know about HTML, CSS, and JavaScript? <strong>Hit Start</strong> and dive into the quiz!</p>
+    <button class="Button-Start"> START</button>
+</section>
+
+<section class="quiz">
+    <div style="display: flex; justify-content: space-between;">
+<p style="opacity:0.5;" id="progress">Question 1 to 5</p> 
+<p class="score_score"> </p>
+</div> 
+<div align="center" class="questions" id="question"> Question</div>
+<div id="options"></div>
+<div style="display: flex;justify-content: space-between;">
+<button class="Button-pre" id="button-previous"> PREVIOUS</button>
+<button class="Button-next" id="button-next"> NEXT</button>
+</div>
+</section>
+<section class="result">
+ <div class="score" id="final-score">0/5</div>
+ <div id="final-message"></div>
+ <button class="button-retake" id="button-retake">RETAKE QUIZ</button>
+</section>
+</main>
+</div>
+</body>
+<script>
+    const sectionscreen = document.querySelector(".section-quiz");
+const startBtn = document.querySelector(".Button-Start");
+const quizscreen = document.querySelector(".quiz");
+
+const progressscore = document.getElementById("progress");
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const prevBtn = document.getElementById('button-previous');
+const nextBtn = document.getElementById('button-next');
+const scorecount = document.querySelector(".score_score");
+
+const resultScreen = document.querySelector('.result');
+const finalScoreEl = document.getElementById('final-score');
+const finalMessageEl = document.getElementById('final-message');
+const retakeBtn = document.getElementById('button-retake');
+
+const questions = [
+  { q: "Which HTML tag is used to make a link?", choices: ["<a>", "<link>", "<href>"], answer: 0 },
+  { q: "CSS Flexbox is used mainly for layout.", choices: ["True", "False"], answer: 0 },
+  { q: "Which event runs when you click something in JS?", choices: ["onclick", "onhover", "onload"], answer: 0 },
+  { q: "JavaScript can change HTML without page reload.", choices: ["True", "False"], answer: 0 },
+  { q: "Which method selects an element by ID?", choices: ["querySelector()", "getElementById()", "getElementsByClassName()"], answer: 1 }
+];
+
+let current = 0;
+let score = 0;
+
+// correct initial states
+sectionscreen.style.display = 'flex';
+quizscreen.style.display = 'none';
+resultScreen.style.display = 'none';
+
+// FIXED CLICK EVENT
+startBtn.addEventListener('click', () => {
+    sectionscreen.style.display = 'none';
+    quizscreen.style.display = 'block';
+    resultScreen.style.display = 'none';
+    score = 0;
+    current = 0;
+    loadquestion();
+});
+
+function loadquestion() {
+    const q = questions[current];
+    questionEl.textContent = q.q;
+    optionsEl.innerHTML = '';    
+    q.choices.forEach((choice, index) => {
+        const button = document.createElement('button');
+        button.textContent = choice;
+        // store index to check later
+   button.style.display = 'block';
+    button.style.margin = '8px auto';
+   button.style.padding = '8px 12px';
+   button.style.width = '80%';
+        button.addEventListener('click', () => {
+            if (index === q.answer) {
+                score++;
+                scorecount.textContent = `Score: ${score}`;
+            }
+            current++;
+
+            if (current < questions.length) {
+                loadquestion();
+            } else {
+                showResult();
+            }
+        });
+
+        optionsEl.appendChild(button);
+    });
+}
+
+function showResult() {
+    sectionscreen.style.display = 'none';
+    quizscreen.style.display = 'none';    
+    resultScreen.style.display = 'flex';
+
+    finalScoreEl.textContent = `${score}/${questions.length}`;
+
+    if (score === questions.length) {
+        finalMessageEl.textContent = 'Excellent! You aced the quiz!';
+    } else if (score >= questions.length / 2) {
+        finalMessageEl.textContent = 'Good job! You did well.';
+    } else {
+        finalMessageEl.textContent = 'Keep trying! You can improve.';
+    }
+}
+nextBtn.addEventListener('click', () => {
+  if (current < questions.length - 1) {
+    current++;
+    loadquestion();
+  } else {
+    showResult();
+  }
+});
+prevBtn.addEventListener('click', () => {
+  if (current > 0) {
+    current--;
+    loadquestion();
+  }
+});
+retakeBtn.addEventListener('click', () => {
+    sectionscreen.style.display = 'flex';                                   
+    quizscreen.style.display = 'none';
+    resultScreen.style.display = 'none';    });
+    </script>
+</html>
