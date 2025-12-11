@@ -29,7 +29,8 @@
     <button id="btnColor">Change Background Color</button>
 
     <hr>
-
+<img id="PICTURE" src="h.jpg" alt="IMG" width="500">
+    <hr>
 
     <input type="text" id="keyInput" placeholder="Type anything...">
     <p id="keyResult"></p>
@@ -56,15 +57,16 @@
             document.body.style.backgroundColor = "lightblue";
         });
 
-        var img = document.getElementById("hoverImg");
+        const img = document.getElementById("PICTURE");
 
-        img.addEventListener("mouseover", function () {
-            img.src = "https://via.placeholder.com/200/ff0000/ffffff";
-        });
+    img.addEventListener("mouseover", () => {
+        img.style.width = "400px";   // Increase size
+        img.style.transition = "0.3s"; // Smooth animation
+    });
 
-        img.addEventListener("mouseout", function () {
-            img.src = "https://via.placeholder.com/200";
-        });
+    img.addEventListener("mouseout", () => {
+        img.style.width = "300px";   // Back to original size
+    });
 
         document.getElementById("keyInput").addEventListener("keydown", function (event) {
             document.getElementById("keyResult").innerText = "You pressed: " + event.key;
@@ -88,4 +90,5 @@
 
 </body>
 </html>
+
 
