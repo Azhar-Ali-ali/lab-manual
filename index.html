@@ -1,117 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Online Lab Manual</title>
-  <style>
-   
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Effect Animation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: "Poppins", Arial, sans-serif;
-      background:#ebd4d4;
-      color: #333;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px;
-    }
+        body {
+            font-family: 'Montserrat', serif;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+        }
 
-    h1 {
-      color: #2b3d8f;
-      font-size: 2.5em;
-      margin-bottom: 15px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    }
+        #liquid-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
 
-    p {
-      font-size: 1.1em;
-      max-width: 700px;
-      text-align: center;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
+        .content-overlay {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+            pointer-events: none;
+        }
 
-    a {
-      color: #fff;
-      background-color: #3b57ff;
-      padding: 8px 16px;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
+        .content-overlay h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
 
-    a:hover {
-      background-color: #243baf;
-      transform: scale(1.05);
-    }
+        .content-overlay p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
 
-    .lab-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin: 20px 0;
-    }
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: flex;
+            gap: 15px;
+            pointer-events: auto;
+        }
 
-    hr {
-      width: 80%;
-      border: none;
-      height: 2px;
-      background: #3b57ff;
-      margin: 30px 0;
-    }
+        .controls button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Montserrat', serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
 
-    h2 {
-      color: #1e2b6b;
-      margin-bottom: 15px;
-    }
+        .controls button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
 
-    img {
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      margin: 10px;
-      transition: transform 0.3s;
-    }
+        .controls button.active {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
 
-    img:hover {
-      transform: scale(1.05);
-    }
-  </style>
+        @media (max-width: 768px) {
+            .content-overlay h1 {
+                font-size: 2.5rem;
+            }
+            .content-overlay p {
+                font-size: 1rem;
+            }
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>My Online Lab Manual</h1>
-  <p>
-    Welcome to my online lab manual. This is my personal collection of lab experiments
-    for Web Technologies, where I explore HTML, CSS, and more.
-    Each lab is documented and organized for easy reference.
-  </p>
+    <canvas id="liquid-canvas"></canvas>
+    
+    <div class="content-overlay">
+        <div>
+            <h1><span>liquid background effect</span></h1>
+            
+        </div>
+    </div>
 
-  <div class="lab-links">
-    <a href="lab1.html">Go to Lab 1</a>
-    <a href="lab3.html">Go to Lab 3</a>
-    <a href="lab4.html">Go to Lab 4</a>
-    <a href="lab5.html">Go to Lab 5</a>
-     <a href="LAB6.HTML">Go to Lab 6</a>
-     <a href="lab7.html">Go to Lab 7</a>
-     <a href="lab8.html">Go to Lab 8</a>
-     <a href="lab_9b.html">Go to Lab 9</a>
-  </div>
-  <hr>
-    <div class="lab-links">
-    <a href="assign_3.html">Assignment 3</a>
-  </div>
-  <hr>
-  <h2>GitHub Pages Preview</h2>
-  <img src="lab2.PNG" alt="GitHub Pages Screenshot 1" width="400">
-  <img src="lab2_2.PNG" alt="GitHub Pages Screenshot 2" width="400">
+    <div class="controls">
+        <button id="toggleRain">Toggle Rain</button>
+    </div>
+
+    <script type="module">
+        import LiquidBackground from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.22/build/backgrounds/liquid1.min.js';
+        
+        const canvas = document.getElementById('liquid-canvas');
+        let app = null;
+        let rainEnabled = false;
+
+        // Initialize the liquid background
+        if (canvas) {
+            app = LiquidBackground(canvas);
+            
+            // Don't load any image - keep it black
+            // Configure material properties for a black liquid effect
+            app.liquidPlane.material.metalness = 0.75;
+            app.liquidPlane.material.roughness = 0.25;
+            app.liquidPlane.material.color.setHex(0x000000);
+            app.liquidPlane.uniforms.displacementScale.value = 5;
+            app.setRain(false);
+        }
+
+        // Toggle rain effect
+        const toggleRainBtn = document.getElementById('toggleRain');
+        toggleRainBtn.addEventListener('click', () => {
+            if (app) {
+                rainEnabled = !rainEnabled;
+                app.setRain(rainEnabled);
+                toggleRainBtn.classList.toggle('active', rainEnabled);
+            }
+        });
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (app && app.dispose) {
+                app.dispose();
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-
